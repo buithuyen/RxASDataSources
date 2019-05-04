@@ -182,4 +182,12 @@ public extension Reactive where Base: ASCollectionNode {
         
         return element as! T
     }
+    
+    var scrollViewDidScroll: ControlEvent<UIScrollView> {
+        let source: Observable<UIScrollView> = self.delegate.methodInvoked(#selector(ASCollectionDelegate.scrollViewDidScroll(_:))).map { params in
+            return params[0] as! UIScrollView
+        }
+        
+        return ControlEvent(events: source)
+    }
 }
